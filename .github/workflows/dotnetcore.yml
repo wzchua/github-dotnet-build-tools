@@ -14,7 +14,9 @@ jobs:
     - name: Get Git Version
       uses: docker://gittools/gitversion:5.1.2-linux-ubuntu-18.04-netcoreapp3.0
       with:
-        args: /github/workspace /nofetch /exec /bin/sh /execargs "-c \"echo ::set-env name=NUGET_VERSION::$GitVersion_NuGetVersionV2\""
+        args: /github/workspace /nofetch /exec /bin/sh /execargs "-c \"echo $GitVersion_NuGetVersionV2 > /github/workspace/version.txt\""
+    - name: Update NUGET_VERSION
+      run: echo "::set-env name=NUGET_VERSION::$(cat /home/runner/work/github-dotnet-build-tools/github-dotnet-build-tools/version.txt)"
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
