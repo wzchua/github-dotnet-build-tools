@@ -1,0 +1,27 @@
+name: .NET Core
+
+on: [push]
+
+jobs:
+  build:
+    env:
+      NUGET_VERSION: 0.1.0-default 
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Get Git Version
+      uses: docker://gittools/gitversion:5.1.2-linux-ubuntu-18.04-netcoreapp3.0
+      with:
+        args: /github/workspace /nofetch /exec /bin/sh /execargs "-c \"echo ::set-env name=NUGET_VERSION::$GitVersion_NuGetVersionV2\""
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.0.101
+    - name: Build with dotnet
+      run: dotnet build --configuration Release ./Source
+    - name: Pack Tools
+      run: dotnet pack ./Source/PRMerger.Github/PRMerger.Github.csproj --no-build -c Release -o ./packages /p:Version=$NUGET_VERSION
+    - name: Deploy NuGet Package
+      run: dotnet nuget push ./packages/**.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json /p:Version=$NUGET_VERSION
