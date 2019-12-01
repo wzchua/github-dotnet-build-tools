@@ -1,6 +1,10 @@
 name: .NET Core
 
-on: [push]
+on: 
+  push:
+    # Sequence of patterns matched against refs/heads
+    branches:    
+      - master 
 
 jobs:
   build:
@@ -22,7 +26,7 @@ jobs:
       with:
         dotnet-version: 3.0.101
     - name: Build with dotnet
-      run: dotnet build --configuration Release ./Source
+      run: dotnet build --configuration Release ./Source /p:Version=$NUGET_VERSION
     - name: Pack Tools
       run: dotnet pack ./Source/PRMerger.Github/PRMerger.Github.csproj --no-build -c Release -o ./packages /p:Version=$NUGET_VERSION
     - name: Deploy NuGet Package

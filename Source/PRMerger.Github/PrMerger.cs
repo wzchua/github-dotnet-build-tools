@@ -47,6 +47,7 @@ namespace PRMerger.Github
                 _repository.Reset(ResetMode.Hard);
                 return false;
             }
+            Console.WriteLine("Merge succeeded");
             return true;
         }
         private int? ParsePrNumber(string prBranchName)
