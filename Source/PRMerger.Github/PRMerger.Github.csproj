@@ -7,6 +7,12 @@
         <Nullable>enable</Nullable>
         <PackAsTool>true</PackAsTool>
         <ToolCommandName>merge-github-pr</ToolCommandName>
+        <Authors>wzchua</Authors>
+        <Description>Git Merge against PR target branch</Description>
+        <PackageProjectUrl>https://github.com/wzchua/github-dotnet-build-tools</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/wzchua/github-dotnet-build-tools</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
     </PropertyGroup>
 
     <ItemGroup>
