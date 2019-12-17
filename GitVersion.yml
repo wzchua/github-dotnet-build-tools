@@ -1,0 +1,5 @@
+branches: {}
+ignore:
+  sha: []
+merge-message-formats:
+  tfs: ^Merge (?:pull request (?<PullRequestNumber>#\d+)) from (?:.+?\/(?<SourceBranch>.+))
