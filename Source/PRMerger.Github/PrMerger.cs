@@ -11,7 +11,7 @@ namespace PRMerger.Github
 {
     public class PrMerger
     {
-        private static readonly string PrRegexStr = "^pull\\/(?<prNumber>\\d+)$";
+        private static readonly string PrRegexStr = "^pull\\/(?<prNumber>\\d+)(\\/head)?$";
         private static readonly Regex PrRegex = new Regex(PrRegexStr, RegexOptions.Compiled);
         
         private readonly GithubIdentity _gitIdentity;
